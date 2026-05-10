@@ -1,0 +1,71 @@
+<mujoco model="ddmoma_7dof">
+  <compiler angle="radian" coordinate="local"/>
+  <option timestep="0.002" gravity="0 0 -9.81"/>
+  <default>
+    <joint damping="0.5" armature="0.01"/>
+    <geom rgba="0.45 0.55 0.65 1" friction="0.8 0.1 0.1"/>
+  </default>
+  <asset>
+    <material name="base_mat" rgba="0.16 0.25 0.30 1"/>
+    <material name="arm_mat" rgba="0.80 0.48 0.18 1"/>
+    <material name="wheel_mat" rgba="0.04 0.04 0.04 1"/>
+  </asset>
+  <worldbody>
+    <geom name="floor" type="plane" size="6 6 0.05" rgba="0.86 0.86 0.82 1"/>
+    <body name="mobile_base" pos="0 0 0.18">
+      <joint name="base_free" type="free"/>
+      <geom name="base_collision" type="box" size="0.32 0.24 0.12" material="base_mat"/>
+      <body name="left_wheel" pos="0 0.29 -0.05">
+        <joint name="left_wheel_joint" type="hinge" axis="0 1 0"/>
+        <geom type="cylinder" size="0.08 0.035" euler="1.5708 0 0" material="wheel_mat"/>
+      </body>
+      <body name="right_wheel" pos="0 -0.29 -0.05">
+        <joint name="right_wheel_joint" type="hinge" axis="0 1 0"/>
+        <geom type="cylinder" size="0.08 0.035" euler="1.5708 0 0" material="wheel_mat"/>
+      </body>
+      <body name="arm_mount" pos="0.18 0 0.18">
+        <geom type="cylinder" size="0.09 0.08" material="base_mat"/>
+        <body name="link_1" pos="0 0 0.12">
+          <joint name="arm_joint_1" type="hinge" axis="0 0 1" range="-3.1416 3.1416"/>
+          <geom type="capsule" fromto="0 0 0 0 0 0.20" size="0.035" material="arm_mat"/>
+          <body name="link_2" pos="0 0 0.20">
+            <joint name="arm_joint_2" type="hinge" axis="0 1 0" range="-2.8 2.8"/>
+            <geom type="capsule" fromto="0 0 0 0.18 0 0" size="0.032" material="arm_mat"/>
+            <body name="link_3" pos="0.18 0 0">
+              <joint name="arm_joint_3" type="hinge" axis="0 1 0" range="-2.8 2.8"/>
+              <geom type="capsule" fromto="0 0 0 0 0 0.20" size="0.030" material="arm_mat"/>
+              <body name="link_4" pos="0 0 0.20">
+                <joint name="arm_joint_4" type="hinge" axis="1 0 0" range="-3.1416 3.1416"/>
+                <geom type="capsule" fromto="0 0 0 0.16 0 0" size="0.028" material="arm_mat"/>
+                <body name="link_5" pos="0.16 0 0">
+                  <joint name="arm_joint_5" type="hinge" axis="0 1 0" range="-2.8 2.8"/>
+                  <geom type="capsule" fromto="0 0 0 0 0 0.16" size="0.026" material="arm_mat"/>
+                  <body name="link_6" pos="0 0 0.16">
+                    <joint name="arm_joint_6" type="hinge" axis="1 0 0" range="-3.1416 3.1416"/>
+                    <geom type="capsule" fromto="0 0 0 0.12 0 0" size="0.024" material="arm_mat"/>
+                    <body name="link_7" pos="0.12 0 0">
+                      <joint name="arm_joint_7" type="hinge" axis="0 1 0" range="-3.1416 3.1416"/>
+                      <geom type="capsule" fromto="0 0 0 0.10 0 0" size="0.022" material="arm_mat"/>
+                      <site name="tool0" pos="0.10 0 0" size="0.025" rgba="0.1 0.8 0.3 1"/>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <actuator>
+    <velocity name="left_wheel_velocity" joint="left_wheel_joint" kv="20"/>
+    <velocity name="right_wheel_velocity" joint="right_wheel_joint" kv="20"/>
+    <position name="arm_joint_1_position" joint="arm_joint_1" kp="80"/>
+    <position name="arm_joint_2_position" joint="arm_joint_2" kp="80"/>
+    <position name="arm_joint_3_position" joint="arm_joint_3" kp="80"/>
+    <position name="arm_joint_4_position" joint="arm_joint_4" kp="80"/>
+    <position name="arm_joint_5_position" joint="arm_joint_5" kp="80"/>
+    <position name="arm_joint_6_position" joint="arm_joint_6" kp="80"/>
+    <position name="arm_joint_7_position" joint="arm_joint_7" kp="80"/>
+  </actuator>
+</mujoco>

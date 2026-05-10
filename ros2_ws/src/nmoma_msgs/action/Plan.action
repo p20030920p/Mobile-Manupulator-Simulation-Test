@@ -1,0 +1,12 @@
+float64[] start_state
+float64[] goal_state
+sensor_msgs/PointCloud2 scene
+int32 sample_count
+---
+nav_msgs/Path base_path
+trajectory_msgs/JointTrajectory arm_trajectory
+bool success
+string message
+---
+float32 progress
+string stage

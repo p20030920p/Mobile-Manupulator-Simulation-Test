@@ -1,0 +1,6 @@
+numpy>=1.24
+mujoco>=3.2
+torch>=2.4
+scikit-learn>=1.4
+casadi>=3.6
+osqp>=0.6
