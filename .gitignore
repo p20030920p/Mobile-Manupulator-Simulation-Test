@@ -11,3 +11,6 @@ ros2_ws/install/
 ros2_ws/log/
 datasets/
 artifacts/
+.agents/
+.vscode/
+skills-lock.json

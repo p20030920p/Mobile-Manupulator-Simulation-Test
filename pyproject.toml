@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nmoma-repro"
-version = "0.2.0"
+version = "0.2.1"
 description = "Minimal reproduction scaffold for primitive-based truncated diffusion mobile manipulation planning."
 requires-python = ">=3.10"
 dependencies = ["numpy>=1.24"]

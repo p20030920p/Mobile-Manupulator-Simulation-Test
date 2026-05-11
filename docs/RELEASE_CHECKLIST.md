@@ -30,7 +30,7 @@ python -m compileall nmoma_repro scripts ros2_ws/src/nmoma_ros2/nmoma_ros2
 
 ```bash
 git add .
-git commit -m "chore: prepare v0.2.0 maintenance release"
+git commit -m "chore: prepare v0.2.1 maintenance release"
 ```
 
 ## 5. Push To GitHub
@@ -49,8 +49,8 @@ git push -u origin main
 ## 6. Optional Tag
 
 ```bash
-git tag v0.2.0
-git push origin v0.2.0
+git tag v0.2.1
+git push origin v0.2.1
 ```
 
 ## 7. GitHub Review

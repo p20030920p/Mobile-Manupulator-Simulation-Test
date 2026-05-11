@@ -2,6 +2,12 @@
 
 All notable changes to this repository are tracked here.
 
+## 0.2.1 - 2026-05-12
+
+- Added visual MuJoCo demo modes: `--viewer` for an interactive window and `--render-dir` for frame export.
+- Added a pure standard-library PNG frame writer so VM/headless users can inspect rendered frames without Pillow/OpenCV/imageio.
+- Clarified that the default MuJoCo command is a stability smoke test, not a visual demo.
+
 ## 0.2.0 - 2026-05-11
 
 - Fixed MuJoCo instability by replacing the 6DoF `base_free` scaffold with a planar `base_x/base_y/base_yaw` base that matches the paper state space.

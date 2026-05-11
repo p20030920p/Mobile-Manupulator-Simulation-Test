@@ -49,6 +49,20 @@ MuJoCo smoke test：
 python scripts/run_mujoco_demo.py
 ```
 
+这条命令只做稳定性检查，不会打开窗口。要看到可视化演示，请使用：
+
+```bash
+python scripts/run_mujoco_demo.py --viewer
+```
+
+如果在虚拟机、SSH、无显示器环境里无法打开窗口，可以导出 PPM 图片帧：
+
+```bash
+python scripts/run_mujoco_demo.py --render-dir artifacts/mujoco_demo_frames --steps 240 --render-every 12 --frame-format png
+```
+
+然后用图片查看器打开 `artifacts/mujoco_demo_frames/frame_*.png`。该模式使用脚本内置的 PNG 写入器，不依赖 Pillow/OpenCV/imageio；只有需要原始图片帧时才使用 `--frame-format ppm`。
+
 如果旧版本输出 `WARNING: Nan, Inf or huge value in QACC at DOF 0`，根因是 MVP MJCF 曾把移动底盘建成 6DoF `free` joint，同时轮子 velocity actuator 默认锁轮，在接触/摩擦约束中容易让自由底盘产生巨大平移加速度。当前版本已改成符合论文状态空间的平面底盘 `base_x/base_y/base_yaw`，并在 demo 中逐步检查 `qpos/qvel/qacc`。
 
 核心算法 smoke test：

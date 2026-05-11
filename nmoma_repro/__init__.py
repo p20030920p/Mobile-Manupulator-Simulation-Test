@@ -9,6 +9,6 @@ from nmoma_repro.kinematics import RobotSpec
 from nmoma_repro.planner import PlannerModel
 from nmoma_repro.primitives import PrimitiveLibrary
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 __all__ = ["PlannerModel", "PrimitiveLibrary", "RobotSpec"]

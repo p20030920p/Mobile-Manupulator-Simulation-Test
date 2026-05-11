@@ -12,8 +12,8 @@ class RepositoryMaintenanceTest(unittest.TestCase):
     def test_project_version_is_declared_once_in_pyproject(self):
         data = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
 
-        self.assertEqual(data["project"]["version"], "0.2.0")
-        self.assertEqual(nmoma_repro.__version__, "0.2.0")
+        self.assertEqual(data["project"]["version"], "0.2.1")
+        self.assertEqual(nmoma_repro.__version__, "0.2.1")
 
     def test_github_ci_runs_core_reproduction_checks(self):
         workflow_path = ROOT / ".github" / "workflows" / "ci.yml"

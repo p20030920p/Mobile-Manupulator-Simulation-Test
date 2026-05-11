@@ -1,6 +1,6 @@
 # NMOMA Reproduction MVP
 
-Version: `0.2.0`
+Version: `0.2.1`
 
 This repository is a practical reproduction scaffold for the paper
 **Primitive-based Truncated Diffusion for Efficient Trajectory Generation of Differential Drive Mobile Manipulators**.
@@ -20,6 +20,24 @@ python scripts/run_core_planner_demo.py
 python scripts/run_mujoco_demo.py
 python scripts/run_benchmark.py --task-count 5 --sample-count 3
 ```
+
+`python scripts/run_mujoco_demo.py` is a stability smoke test. It does not open a window by default, so it is safe for CI.
+
+## Visual MuJoCo Demo
+
+Open an interactive MuJoCo viewer window:
+
+```bash
+python scripts/run_mujoco_demo.py --viewer
+```
+
+If you are in a VM, SSH session, or headless environment, export viewable PPM frames instead:
+
+```bash
+python scripts/run_mujoco_demo.py --render-dir artifacts/mujoco_demo_frames --steps 240 --render-every 12 --frame-format png
+```
+
+Open the generated `frame_*.png` files from `artifacts/mujoco_demo_frames/` with your image viewer. This mode uses a tiny built-in PNG writer and avoids Pillow/OpenCV/imageio dependencies. Use `--frame-format ppm` only if you specifically want raw PPM frames.
 
 On this Codex workspace, use the bundled Python executable if `python` is not associated correctly:
 
@@ -67,7 +85,7 @@ Typical upload flow:
 
 ```bash
 git add .
-git commit -m "chore: prepare v0.2.0 maintenance release"
+git commit -m "chore: prepare v0.2.1 maintenance release"
 git push origin master
 ```
 
