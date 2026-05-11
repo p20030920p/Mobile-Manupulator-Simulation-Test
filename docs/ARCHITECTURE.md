@@ -37,6 +37,8 @@ The planner batch output has shape:
 - `optimizer.py`: lightweight path pruning and resampling post-processing.
 - `metrics.py`: reproduction metrics helpers.
 - `data.py`: dataset sample file contract.
+- `training.py`: primitive fitting from MVP dataset samples.
+- `benchmark.py`: paper metric contract for `S.R.`, `T.P./ms`, `T.D./s`, and `D.S.`.
 
 ## ROS 2 Interface
 

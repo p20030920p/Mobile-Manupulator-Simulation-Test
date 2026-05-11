@@ -11,7 +11,7 @@
 - `Truncated diffusion`：`nmoma_repro/diffusion.py` 实现线性 diffusion schedule 和 primitive 截断加噪公式。
 - `Loss/Post-processing`：`nmoma_repro/losses.py` 和 `nmoma_repro/optimizer.py` 实现重建、平滑、均匀采样、安全损失接口，以及路径剪枝/重采样。
 - `ROS 2`：`ros2_ws/src/nmoma_msgs/action/Plan.action` 固定 `/nmoma/plan` action 接口，`nmoma_ros2` 提供 action server 包装。
-- `MuJoCo`：`mujoco/ddmoma_7dof.xml` 提供差速底盘 + 7DoF 机械臂模型脚手架。
+- `MuJoCo`：`mujoco_models/ddmoma_7dof.xml` 提供差速底盘 + 7DoF 机械臂模型脚手架。
 
 ## Ubuntu 24.04 复现环境
 
@@ -49,11 +49,21 @@ MuJoCo smoke test：
 python scripts/run_mujoco_demo.py
 ```
 
+如果旧版本输出 `WARNING: Nan, Inf or huge value in QACC at DOF 0`，根因是 MVP MJCF 曾把移动底盘建成 6DoF `free` joint，同时轮子 velocity actuator 默认锁轮，在接触/摩擦约束中容易让自由底盘产生巨大平移加速度。当前版本已改成符合论文状态空间的平面底盘 `base_x/base_y/base_yaw`，并在 demo 中逐步检查 `qpos/qvel/qacc`。
+
 核心算法 smoke test：
 
 ```bash
 python -m unittest discover -s tests
 python scripts/run_core_planner_demo.py
+```
+
+Primitive 和 benchmark MVP：
+
+```bash
+python scripts/generate_mvp_dataset.py --count 100 --scene cuboids --out datasets/mvp_cuboids
+python scripts/fit_primitives.py --dataset datasets/mvp_cuboids --out artifacts/primitives_mvp.npz --primitive-count 32
+python scripts/run_benchmark.py --scenes cuboids,mixed --task-count 100 --sample-count 4 --primitive-library artifacts/primitives_mvp.npz
 ```
 
 ## 如何继续推进到论文级复现

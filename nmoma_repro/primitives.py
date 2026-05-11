@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from pathlib import Path
 
 import numpy as np
 
@@ -20,6 +21,16 @@ class PrimitiveLibrary:
         candidates = self.primitives.reshape(self.primitives.shape[0], -1)
         distances = np.linalg.norm(candidates - target, axis=1)
         return int(np.argmin(distances))
+
+    def save(self, path: str | Path) -> None:
+        output = Path(path)
+        output.parent.mkdir(parents=True, exist_ok=True)
+        np.savez_compressed(output, primitives=self.primitives)
+
+    @staticmethod
+    def load(path: str | Path) -> "PrimitiveLibrary":
+        data = np.load(Path(path))
+        return PrimitiveLibrary(data["primitives"])
 
 
 def build_primitive_library(paths: np.ndarray, primitive_count: int = 32, seed: int = 0, iterations: int = 25) -> PrimitiveLibrary:

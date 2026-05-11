@@ -1,9 +1,9 @@
 <mujoco model="ddmoma_7dof">
   <compiler angle="radian" coordinate="local"/>
-  <option timestep="0.002" gravity="0 0 -9.81"/>
+  <option timestep="0.001" gravity="0 0 -9.81" integrator="implicit"/>
   <default>
-    <joint damping="0.5" armature="0.01"/>
-    <geom rgba="0.45 0.55 0.65 1" friction="0.8 0.1 0.1"/>
+    <joint damping="1.0" armature="0.02"/>
+    <geom rgba="0.45 0.55 0.65 1" friction="0.8 0.1 0.1" contype="0" conaffinity="0" density="500"/>
   </default>
   <asset>
     <material name="base_mat" rgba="0.16 0.25 0.30 1"/>
@@ -13,7 +13,9 @@
   <worldbody>
     <geom name="floor" type="plane" size="6 6 0.05" rgba="0.86 0.86 0.82 1"/>
     <body name="mobile_base" pos="0 0 0.18">
-      <joint name="base_free" type="free"/>
+      <joint name="base_x" type="slide" axis="1 0 0" damping="5.0" armature="0.1"/>
+      <joint name="base_y" type="slide" axis="0 1 0" damping="5.0" armature="0.1"/>
+      <joint name="base_yaw" type="hinge" axis="0 0 1" damping="2.0" armature="0.05"/>
       <geom name="base_collision" type="box" size="0.32 0.24 0.12" material="base_mat"/>
       <body name="left_wheel" pos="0 0.29 -0.05">
         <joint name="left_wheel_joint" type="hinge" axis="0 1 0"/>
@@ -58,14 +60,14 @@
     </body>
   </worldbody>
   <actuator>
-    <velocity name="left_wheel_velocity" joint="left_wheel_joint" kv="20"/>
-    <velocity name="right_wheel_velocity" joint="right_wheel_joint" kv="20"/>
-    <position name="arm_joint_1_position" joint="arm_joint_1" kp="80"/>
-    <position name="arm_joint_2_position" joint="arm_joint_2" kp="80"/>
-    <position name="arm_joint_3_position" joint="arm_joint_3" kp="80"/>
-    <position name="arm_joint_4_position" joint="arm_joint_4" kp="80"/>
-    <position name="arm_joint_5_position" joint="arm_joint_5" kp="80"/>
-    <position name="arm_joint_6_position" joint="arm_joint_6" kp="80"/>
-    <position name="arm_joint_7_position" joint="arm_joint_7" kp="80"/>
+    <velocity name="left_wheel_velocity" joint="left_wheel_joint" kv="2"/>
+    <velocity name="right_wheel_velocity" joint="right_wheel_joint" kv="2"/>
+    <position name="arm_joint_1_position" joint="arm_joint_1" kp="30"/>
+    <position name="arm_joint_2_position" joint="arm_joint_2" kp="30"/>
+    <position name="arm_joint_3_position" joint="arm_joint_3" kp="30"/>
+    <position name="arm_joint_4_position" joint="arm_joint_4" kp="30"/>
+    <position name="arm_joint_5_position" joint="arm_joint_5" kp="30"/>
+    <position name="arm_joint_6_position" joint="arm_joint_6" kp="30"/>
+    <position name="arm_joint_7_position" joint="arm_joint_7" kp="30"/>
   </actuator>
 </mujoco>

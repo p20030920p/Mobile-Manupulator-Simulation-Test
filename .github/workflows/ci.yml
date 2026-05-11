@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  core:
+    name: Core reproduction checks
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install core dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+          python -m pip install mujoco
+
+      - name: Run unit tests
+        run: python -m unittest discover -s tests
+
+      - name: Run core planner demo
+        run: python scripts/run_core_planner_demo.py
+
+      - name: Run MuJoCo smoke test
+        run: python scripts/run_mujoco_demo.py
+
+      - name: Run benchmark smoke test
+        run: python scripts/run_benchmark.py --task-count 3 --sample-count 3 --scenes cuboids

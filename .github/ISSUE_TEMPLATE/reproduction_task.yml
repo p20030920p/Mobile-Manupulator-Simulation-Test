@@ -1,0 +1,33 @@
+name: Reproduction task
+description: Track paper reproduction progress as a maintainable task.
+title: "[Repro]: "
+labels: ["reproduction"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Core planner
+        - MuJoCo model
+        - ROS 2 integration
+        - Dataset generation
+        - Training
+        - Benchmark
+        - Documentation
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: What paper behavior or metric should this reproduce?
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Commands, metrics, or artifacts proving this is done.
+    validations:
+      required: true
